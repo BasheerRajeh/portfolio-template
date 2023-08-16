@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import flagSrc from "@/public/assets/images/twemoji_flag-saudi-arabia.svg";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const tajawal = Tajawal({ weight: ["500"], subsets: ["latin"] });
 
@@ -37,14 +38,14 @@ const formLoginSchema = z.object({
 
 const LoginForm = () => {
     const session = useSession();
-
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
 
-    useEffect(()=>{
-        if(session.status === 'authenticated'){
-            console.log('Authenticated');
+    useEffect(() => {
+        if (session.status === "authenticated") {
+            router.push("/blog");
         }
-    }, [session.status])
+    }, [session.status, router]);
 
     const form = useForm<z.infer<typeof formLoginSchema>>({
         resolver: zodResolver(formLoginSchema),
@@ -64,6 +65,7 @@ const LoginForm = () => {
             }
             if (callback?.ok && !callback?.error) {
                 toast.success("Logged in!");
+                router.push("/blog");
             }
         });
     };

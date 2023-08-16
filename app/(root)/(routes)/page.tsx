@@ -8,7 +8,7 @@ export default function Home() {
   const pathname = usePathname()
   
   return (
-    <div className="pt-20">
+    <div className="">
       {origin}
       <br />
       {pathname}

@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { EyeIcon, EyeOff } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import {
     Form,
     FormControl,
@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import flagSrc from "@/public/assets/images/twemoji_flag-saudi-arabia.svg";
 import { cn } from "@/lib/utils";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const tajawal = Tajawal({ weight: ["500"], subsets: ["latin"] });
 
@@ -42,13 +43,15 @@ const formRegisterSchema = z
 
 const RegisterForm = () => {
     const session = useSession();
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    useEffect(()=>{
-        if(session.status === 'authenticated'){
-            console.log('Authenticated');
+    useEffect(() => {
+        if (session.status === "authenticated") {
+            router.push("/blog");
         }
-    }, [session.status])
+    }, [session.status, router]);
 
     const form = useForm<z.infer<typeof formRegisterSchema>>({
         resolver: zodResolver(formRegisterSchema),
@@ -60,16 +63,19 @@ const RegisterForm = () => {
         },
     });
 
-    const onSubmit = async (values: z.infer<typeof formRegisterSchema>) => {
-        try {
-            await axios.post("/api/register", values);
-            toast.success("Logged in successfully");
-        } catch (error) {
-            toast.error("Something went wrong");
-        }
+    const onSubmit = (values: z.infer<typeof formRegisterSchema>) => {
+        setIsLoading(true);
+        axios
+            .post("/api/register", values)
+            .then(() => {
+                toast.success("Logged in successfully");
+                signIn("credentials", values);
+            })
+            .catch(() => {
+                toast.error("Something went wrong");
+            })
+            .finally(() => setIsLoading(false));
     };
-
-    const isLoading = form.formState.isSubmitting;
 
     return (
         <Form {...form}>
