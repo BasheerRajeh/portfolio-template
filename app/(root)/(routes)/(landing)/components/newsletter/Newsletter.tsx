@@ -1,16 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
+import primaryArrow from '@/public/assets/images/primary-arrow.svg';
+import Image from "next/image";
 const Newsletter = () => {
     return (
         <div className="px-4 flex flex-col lg:flex-row lg:items-center justify-center my-14 space-y-4">
-            <div className="flex flex-col">
+            <div className="flex flex-col relative">
                 <h3 className="py-6 text-4xl leading-relaxed tracking-wider font-extrabold">
                     Subscribe To Get Latest Update From Us
                 </h3>
                 <h4 className="-order-1 text-accent text-xl font-semibold uppercase tracking-wider">
                     subscribe
                 </h4>
+                <Image alt="" src={primaryArrow} className="absolute rotate-[135deg] lg:rotate-0 right-0 -bottom-20 lg:-bottom-14" />
             </div>
             <div className="lg:w-1/2">
                 <p className="my-5 text-muted-foreground text-2xl tracking-wide">
