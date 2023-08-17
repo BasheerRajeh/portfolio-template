@@ -8,7 +8,7 @@ const Callouts = () => {
     return (
         <div className="relative bg-primary min-h-[600px]">
             <div className="after:content-[''] after:absolute after:w-full after:h-full after:block after:bg-no-repeat after:bg-[length:200px] after:bg-[right_top_-4rem] after:bg-hero-pattern before:absolute before:content-[''] before:w-full before:h-full before:block before:bg-no-repeat before:bg-[length:170px] before:bg-[left_bottom_-2rem] before:bg-callouts-pattern"></div>
-            <Container>
+            <Container className=" overflow-hidden">
                 <div className="flex flex-col lg:flex-row lg:justify-between items-center">
                     <Image
                         src={personUrl}
@@ -25,7 +25,7 @@ const Callouts = () => {
                             elit. Quod consequatur dicta delectus enim repellat
                             voluptatem? Facilis at eum dolore et.
                         </p>
-                        <div className="py-6">
+                        <div className="py-6 overflow-clip">
                             <Button
                                 variant="secondary"
                                 className="w-1/2 md:w-1/3 md:px-8 p-6 text-white font-bold text-lg tracking-wider"
@@ -36,7 +36,7 @@ const Callouts = () => {
                                 alt=""
                                 src={heroArrow}
                                 width={300}
-                                className="absolute w-[200px] md:w-[300px] right-3 -bottom-5 rotate-45 md:-bottom-5 lg:right-10"
+                                className="absolute w-[200px] md:w-[300px] right-3 -bottom-0 lg:right-10"
                             />
                         </div>
                     </div>

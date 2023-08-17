@@ -52,7 +52,7 @@ const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false }) => {
     return (
         <div
             className={cn(
-                "fixed w-full flex items-center z-10 h-20",
+                "fixed w-full flex items-center z-20 h-20",
                 type === "primary" ? "bg-primary" : ""
             )}
         >
