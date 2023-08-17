@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
@@ -7,6 +8,7 @@ const LandingLayout = ({ children }: { children: React.ReactNode }) => {
         <Navbar />
         <div className="pt-20">{children}</div>
       </main>
+      <Footer />
     </div>
   );
 };
