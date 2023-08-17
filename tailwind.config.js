@@ -72,6 +72,7 @@ module.exports = {
       },
       backgroundImage: {
         'hero-pattern': "url('/assets/images/hero-pattern.svg')",
+        'callouts-pattern': "url('/assets/images/callouts-pattern.svg')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
