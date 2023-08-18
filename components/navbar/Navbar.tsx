@@ -27,15 +27,15 @@ const routes = [
     },
     {
         label: "About Me",
-        href: "/#about-me",
+        href: "#about-me",
     },
     {
         label: "Services",
-        href: "/#services",
+        href: "#services",
     },
     {
         label: "Portfolio",
-        href: "/#portfolio",
+        href: "#portfolio",
     },
     {
         label: "Blog",
@@ -46,14 +46,15 @@ const routes = [
 interface NavbarProps {
     type?: "primary" | "secondary";
     auth?: boolean;
+    active?: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false }) => {
+const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false, active='/' }) => {
     return (
         <div
             className={cn(
                 "fixed w-full flex items-center z-20 h-20",
-                type === "primary" ? "bg-primary" : ""
+                type === "primary" ? "bg-primary" : "bg-white shadow-sm"
             )}
         >
             <Container>
@@ -77,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false }) => {
                                 </PopoverTrigger>
                                 <PopoverContent className="w-screen">
                                     <NavMenu
-                                        active="/"
+                                        active={active}
                                         position="vertical"
                                         routes={routes}
                                     />
@@ -86,7 +87,7 @@ const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false }) => {
                             <div
                                 className={`hidden py-2 w-full md:w-auto flex-grow md:block text-${type}-foreground`}
                             >
-                                <NavMenu active="/" routes={routes} />
+                                <NavMenu active={active} routes={routes} />
                             </div>
                             <div
                                 className={`hidden py-2 lg:block text-${type}-foreground`}
@@ -95,7 +96,7 @@ const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false }) => {
                                     <DropdownMenuTrigger asChild>
                                         <Button
                                             variant="ghost"
-                                            className="px-1 hover:bg-transparent"
+                                            className="px-1 hover:bg-transparent hover:text-accent"
                                         >
                                             <ChevronDown className="w-4 h-4 mr-2" />
                                             EN

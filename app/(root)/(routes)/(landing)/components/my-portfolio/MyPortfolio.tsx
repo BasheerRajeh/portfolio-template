@@ -33,7 +33,7 @@ const projects = [
 
 const MyPortfolio = () => {
     return (
-        <Section title="My Portfolio">
+        <Section id='portfolio' title="My Portfolio">
             <div className="p-3 sm:px-6 md:px-16 flex flex-col space-y-8">
                 {projects.map((project, idx) => (
                     <ProjectMediaCard

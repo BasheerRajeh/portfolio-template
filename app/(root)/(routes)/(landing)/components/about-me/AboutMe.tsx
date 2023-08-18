@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const AboutMe = () => {
     return (
-            <Section title="About Me">
+            <Section id='about-me' title="About Me">
                 <div className="flex flex-col lg:flex-row justify-center items-center">
                     <div className="w-full sm:w-4/5 md:w-1/2">
                         <ImageFrame className="shadow-md">
