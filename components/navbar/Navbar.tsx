@@ -19,6 +19,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Globe, Menu } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const routes = [
     {
@@ -49,7 +52,28 @@ interface NavbarProps {
     active?: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false, active='/' }) => {
+const Navbar: React.FC<NavbarProps> = ({
+    type = "primary",
+    auth = false,
+    active = "/",
+}) => {
+    const session = useSession();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (session.status === "authenticated") {
+            router.push("/blog");
+        }
+    }, [session.status, router]);
+
+    const handleClick = () => {
+        if (session.status === "authenticated") {
+            signOut();
+        } else {
+            router.push("/sign-in");
+        }
+    };
+
     return (
         <div
             className={cn(
@@ -117,8 +141,11 @@ const Navbar: React.FC<NavbarProps> = ({ type = "primary", auth = false, active=
                             <Button
                                 variant="accent"
                                 className="px-4 text-xs md:text-lg md:px-7 rounded-2xl"
+                                onClick={handleClick}
                             >
-                                Contact Me
+                                {session.status === "authenticated"
+                                    ? "Logout"
+                                    : "Login/ Register"}
                             </Button>
                         </>
                     )}
